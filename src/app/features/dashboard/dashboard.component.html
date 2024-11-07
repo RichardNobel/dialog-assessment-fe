@@ -1,0 +1,14 @@
+<div class="card mt-3">
+  <div class="card-body">
+    <h6 class="card-title">Weight entries</h6>
+    <pre><code>{{ storedObject?.entries | json }}</code></pre>
+  </div>
+</div>
+
+<div class="card mt-3">
+  <div class="card-body">
+    <div class="col-md-3 mx-auto">
+      <app-add-weight-entry (entrySubmitted)="storeEntry($event)"></app-add-weight-entry>
+    </div>
+  </div>
+</div>

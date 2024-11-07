@@ -1,0 +1,54 @@
+<form class="form form-horizontal" [formGroup]="entryForm">
+  <div class="mb-3">
+    <div class="input-group">
+      <span class="input-group-text col-4"><label for="entryDate">Date</label></span>
+      <input
+        id="entryDate"
+        class="form-control"
+        placeholder="yyyy-mm-dd"
+        name="dp"
+        ngbDatepicker
+        #dp="ngbDatepicker"
+        formControlName="entryDate"
+        required
+      />
+      <button
+        class="btn btn-outline-secondary bi bi-calendar3"
+        (click)="dp.toggle()"
+        type="button"
+      ></button>
+    </div>
+    @if (entryDate.invalid && (entryDate.dirty || entryDate.touched)) {
+      <div class="alert alert-danger mt-3">
+        <div *ngIf="entryDate.hasError('required')">
+          Date is required.
+        </div>
+      </div>
+    }
+    <div class="input-group mt-1">
+      <span class="input-group-text col-4"><label for="entryWeight">Weight</label></span>
+      <input
+        type="number"
+        id="entryWeight"
+        class="form-control"
+        placeholder="0"
+        min="0"
+        max="700"
+        formControlName="entryWeight"
+        required
+      />
+      <span class="input-group-text col-3" style="user-select: none;">kg</span>
+    </div>
+    @if (entryWeight.invalid && (entryWeight.dirty || entryWeight.touched)) {
+      <div class="alert alert-danger mt-3">
+        <div *ngIf="entryWeight.hasError('required')">
+          Weight is required.
+        </div>
+        <div *ngIf="entryWeight.hasError('max')">
+          Maximum weight is 700kg.
+        </div>
+      </div>
+    }
+    <button type="button" class="btn btn-primary mt-2 col-12" (click)="makeEntry()" [disabled]="!entryForm.valid">Add/Update Entry</button>
+  </div>
+</form>
